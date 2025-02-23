@@ -1,3 +1,5 @@
 __pychache__
 venv
 app.db
+pyc
+app\__pychache__
