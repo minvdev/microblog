@@ -32,14 +32,18 @@ class User(UserMixin, db.Model):
     )
     
     following: so.WriteOnlyMapped['User'] = so.relationship(
-        secondary=followers, primaryjoin=(followers.c.follower_id == id),
+        secondary=followers,
+        primaryjoin=(followers.c.follower_id == id),
         secondaryjoin=(followers.c.followed_id == id),
-        back_populates='followers')
+        back_populates='followers'
+    )
     
     followers: so.WriteOnlyMapped['User'] = so.relationship(
-        secondary=followers, primaryjoin=(followers.c.followed_id == id),
+        secondary=followers,
+        primaryjoin=(followers.c.followed_id == id),
         secondaryjoin=(followers.c.follower_id == id),
-        back_populates='following')
+        back_populates='following'
+    )
     
     about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
     
