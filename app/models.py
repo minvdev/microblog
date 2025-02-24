@@ -7,6 +7,15 @@ from werkzeug.security import generate_password_hash ,check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
 
+followers = sa.Table(
+    'followers',
+    db.metadata,
+    sa.Column('follower_id', sa.Integer, sa.ForeignKey('user.id'),
+              primary_key=True),
+    sa.Column('followed_id', sa.Integer, sa.ForeignKey('user.id'),
+              primary_key=True)
+)
+
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
 
