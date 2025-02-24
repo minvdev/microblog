@@ -3,3 +3,4 @@ venv
 app.db
 pyc
 app\__pychache__
+.flaskenv
