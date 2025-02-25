@@ -140,4 +140,4 @@ def unfollow(username):
 def explore():
     query = sa.select(Post).order_by(Post.timestamp.desc())
     posts = db.session.scalars(query).all()
-    render_template("index.html", title='Explore', posts=posts)
+    return render_template("index.html", title='Explore', posts=posts)
