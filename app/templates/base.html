@@ -13,6 +13,8 @@
       &nbsp;~&nbsp;
       <a href={{ url_for('index') }}>Home</a>
       &nbsp;~&nbsp;
+      <a href={{ url_for('explore') }}>Explore</a>
+      &nbsp;~&nbsp;
       {% if current_user.is_anonymous %}
       <a href={{ url_for('login') }}>Login</a>
       {% else %}
