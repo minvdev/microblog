@@ -138,3 +138,4 @@ sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed
 [parameters: ('susan', "Hi there, there's vareto but you can call me warell!", 3)]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
 2025-02-24 13:04:40,169 INFO: Microblog startup [in C:\Users\alvar\Programacion\proyectos\Microblog-2\app\__init__.py:28]
+2025-02-25 12:38:10,008 INFO: Microblog startup [in C:\Users\alvar\programacion\proyectos\Microblog-2\app\__init__.py:28]
