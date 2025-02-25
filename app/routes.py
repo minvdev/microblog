@@ -26,20 +26,7 @@ def index():
         db.session.commit()
         flash('Your post is now live!')
         return redirect(url_for('index'))
-    posts = [
-        {
-            'author': {'username': 'Warell'},
-            'body': 'Un día fantástico para programar'
-        },
-        {
-            'author': {'username': 'Lesomio'},
-            'body': 'Me encanta jugar al rocket leage'
-        },
-        {
-            'author': {'username': 'Totonio'},
-            'body': 'No me gusta el futbol'
-        }
-    ]
+    post = db.session.scalars(current_user.following_posts()).all()
     return render_template('index.html', title='Home Page', form=form,
                            post=post)
 
