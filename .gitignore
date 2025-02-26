@@ -2,3 +2,5 @@ __pycache__
 venv
 .flaskenv
 app.db
+microblog.log
+app\__pycache__
