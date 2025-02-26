@@ -1,6 +1,3 @@
-__pychache__
+__pycache__
 venv
-app.db
-pyc
-app\__pychache__
 .flaskenv
