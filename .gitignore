@@ -3,5 +3,4 @@ venv
 .flaskenv
 app.db
 logs
-app\__pycache__
 app/__pycache__
