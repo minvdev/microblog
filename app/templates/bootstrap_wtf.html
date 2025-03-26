@@ -1,33 +1,33 @@
-{% macro form_field(field, autofocus) %} {% if field.type == 'BooleanField' %}
+{% macro form_field(field, autofocus) %} {%- if field.type == 'BooleanField' %}
 <div class="form-check mb-3">
   {{ field(class='form-check-input') }} {{ field.label(class='form-check-label')
   }}
 </div>
-{% elif field.type == 'RadioField' %} {{ field.label(class='form-label') }} {%
+{%- elif field.type == 'RadioField' %} {{ field.label(class='form-label') }} {%-
 for item in field %}
 <div class="form-check{% if loop.last %} mb-3{% endif %}">
   {{ item(class='form-check-input') }} {{ item.label(class='form-check-label')
   }}
 </div>
-{% endfor %} {% elif field.type == 'SelectField' %} {{
-field.label(class='form-label') }} {{ field(class='form-select mb-3') }} {% elif
-field.type == 'TextAreaField' %}
+{%- endfor %} {%- elif field.type == 'SelectField' %} {{
+field.label(class='form-label') }} {{ field(class='form-select mb-3') }} {%-
+elif field.type == 'TextAreaField' %}
 <div class="mb-3">
   {{ field.label(class='form-label') }} {% if autofocus %} {{
   field(class='form-control' + (' is-invalid' if field.errors else ''),
   autofocus=True) }} {% else %} {{ field(class='form-control' + (' is-invalid'
-  if field.errors else '')) }} {% endif %} {% for error in field.errors %}
+  if field.errors else '')) }} {% endif %} {%- for error in field.errors %}
   <div class="invalid-feedback">{{ error }}</div>
-  {% endfor %}
+  {%- endfor %}
 </div>
-{% elif field.type == 'SubmitField' %} {{ field(class='btn btn-primary mb-3') }}
-{% else %}
+{%- elif field.type == 'SubmitField' %} {{ field(class='btn btn-primary mb-3')
+}} {%- else %}
 <div class="mb-3">
   {{ field.label(class='form-label') }} {% if autofocus %} {{
   field(class='form-control' + (' is-invalid' if field.errors else ''),
   autofocus=True) }} {% else %} {{ field(class='form-control' + (' is-invalid'
-  if field.errors else '')) }} {% endif %} {% for error in field.errors %}
+  if field.errors else '')) }} {% endif %} {%- for error in field.errors %}
   <div class="invalid-feedback">{{ error }}</div>
-  {% endfor %}
+  {%- endfor %}
 </div>
-{% endif %} {% endmacro %}
+{%- endif %} {% endmacro %}
