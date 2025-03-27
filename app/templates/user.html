@@ -2,7 +2,7 @@
 {% block content %}
     <table class="table table-hover">
         <tr>
-            <td width="256px"><img src="{{ user.avatar(128) }}"></td>
+            <td width="256px"><div class="d-flex justify-content-center mt-3"><img class="align-items-center" src="{{ user.avatar(128) }}"></div></td>
             <td>
                 <h1>User: {{ user.username }}</h1>
                 {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
