@@ -4,4 +4,4 @@ venv
 app.db
 logs
 app/__pycache__
-.pot
+messages.pot
