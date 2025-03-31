@@ -5,3 +5,4 @@ app.db
 logs
 app/__pycache__
 messages.pot
+*.json
