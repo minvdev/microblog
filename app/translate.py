@@ -8,7 +8,7 @@ def translate(text, source_language, dest_language):
             return _('Error: the translation service is not configured.')
     url = 'https://translation.googleapis.com/language/translate/v2'
     params = {
-        'key': app.config,
+        'key': app.config['TRANSLATOR_KEY'],
         'q': text,
         'source': source_language,
         'target': dest_language
