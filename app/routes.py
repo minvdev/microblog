@@ -2,6 +2,7 @@ from flask import render_template, redirect, flash, url_for, g
 from app import app, db
 from app.forms import (LoginForm, RegistrationForm, EditProfileForm, EmptyForm,
                        PostForm, ResetPasswordRequestForm, ResetPasswordForm)
+from app.translate import translate
 from flask_login import current_user, login_user, logout_user, login_required
 from flask_babel import _, get_locale
 import sqlalchemy as sa
@@ -199,3 +200,11 @@ def reset_password(token):
         flash(_('Your password has been reset.'))
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
+
+@app.route('/translate', methods=['POST'])
+@login_required
+def translate_text():
+    data = request.get_json()
+    return {'text': translate(data['text'],
+                              data['source_language'],
+                              data['dest_language'])}
