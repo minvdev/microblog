@@ -24,6 +24,8 @@ login.login_message = _l('Please log in to access this page.')
 mail = Mail(app)
 moment = Moment(app)
 babel = Babel(app, locale_selector=get_locale)
+from app.errors import bp as errors_bp
+app.register_blueprint(errors_bp)
 
 if not app.debug:
     if not os.path.exists('logs'):
