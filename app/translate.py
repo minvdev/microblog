@@ -1,14 +1,14 @@
 import requests
 from flask_babel import _
-from app import app
+from flask import current_app
 
 def translate(text, source_language, dest_language):
-    if 'TRANSLATOR_KEY' not in app.config or \
-        not app.config['TRANSLATOR_KEY']:
+    if 'TRANSLATOR_KEY' not in current_app.config or \
+        not current_app.config['TRANSLATOR_KEY']:
             return _('Error: the translation service is not configured.')
     url = 'https://translation.googleapis.com/language/translate/v2'
     params = {
-        'key': app.config['TRANSLATOR_KEY'],
+        'key': current_app.config['TRANSLATOR_KEY'],
         'q': text,
         'source': source_language,
         'target': dest_language
