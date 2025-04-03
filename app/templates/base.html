@@ -99,7 +99,7 @@
       async function translate(sourceElem, destElem, sourceLang, destLang) {
           document.getElementById(destElem).innerHTML =
               '<img src="{{ url_for('static', filename='loading.gif') }}">';
-          const response = await fetch('/translate', {
+          const response = await fetch('/main/translate', {
               method: 'POST',
               headers: {'Content-Type': 'application/json; charset=utf-8'},
               body: JSON.stringify({
