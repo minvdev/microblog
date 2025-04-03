@@ -43,7 +43,7 @@ def create_app(config_class=Config):
     app.register_blueprint(main_bp, url_prefix='/main')
     
     from app.cli import bp as cli_bp
-    app.register_blueprint('cli_bp')
+    app.register_blueprint(cli_bp)
 
     if not app.debug and not app.testing:
         if not os.path.exists('logs'):
@@ -60,4 +60,4 @@ def create_app(config_class=Config):
     
     return app
 
-from app import routes, models
+from app import models
