@@ -21,3 +21,5 @@ class Config:
     MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER')
     # Translation
     TRANSLATOR_KEY = os.environ.get('CLOUD_TRANSLATION_API_KEY')
+    # Full text search
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
