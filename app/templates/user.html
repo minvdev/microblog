@@ -2,12 +2,15 @@
 {% block content %}
     <table class="table table-hover">
         <tr>
-            <td width="256px">
+            <td class="col-md-2">
                 <div class="d-flex justify-content-center mt-3">
-                    <img class="align-items-center" src="{{ user.avatar(128) }}">
+                    <img class="align-items-center img-fluid" 
+                     src="{{ user.avatar(128) }}" 
+                     style="max-width: 100%; width: auto;" 
+                     alt="User Avatar">
                 </div>
             </td>
-            <td>
+            <td class="col-md-10">
                 <h1>{{ _('User: %(username)s', username=user.username) }}</h1>
                 {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
                 {% if user.last_seen %}<p>{{ _('Last seen on') }}: {{ moment(user.last_seen).format('LLL') }}</p>{% endif %}
