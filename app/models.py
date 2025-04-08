@@ -171,7 +171,7 @@ class User(UserMixin, db.Model):
 def load_user(id):
     return db.session.get(User, int(id))
 
-class Post(db.Model):
+class Post(SearchableMixin, db.Model):
     __searcheable__ = ['body']
     
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
