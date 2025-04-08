@@ -19,7 +19,7 @@ class SearchableMixin(object):
             return [], 0
         when = []
         for i, id in enumerate(ids):
-            when.append(id, i)
+            when.append((id, i))
         query = sa.select(cls).where(cls.id.in_(ids)).order_by(
             db.case(*when, value=cls.id))
         return db.session.scalars(query), total
