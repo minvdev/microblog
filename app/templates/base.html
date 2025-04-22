@@ -140,7 +140,12 @@
             popups[i].addEventListener('show.bs.popover', async (ev) => {
                 const response = await fetch('/user/' + ev.target.innerText.trim() + '/popup');
                 const data = await response.text();
-                // update popover here
+                const popover = bootstrap.Popover.getInstance(ev.target);
+                if (popover && data) {
+                    ev.target.popupLoaded = true;
+                    popover.setContent({'.popover-body': data});
+                    flask_moment_render_all();
+                }
             });
         }
       }
