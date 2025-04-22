@@ -141,7 +141,7 @@
             if (ev.target.popupLoaded) {
               return;
             }
-            const response = await fetch('/user/' + ev.target.innerText.trim() + '/popup');
+            const response = await fetch('/main/user/' + ev.target.innerText.trim() + '/popup');
             const data = await response.text();
             const popover = bootstrap.Popover.getInstance(ev.target);
             if (popover && data) {
