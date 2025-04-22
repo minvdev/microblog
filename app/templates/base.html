@@ -137,6 +137,9 @@
                 container: popups[i],
                 customClass: 'd-inline',
             });
+            popups[i].addEventListener('show.bs.popover', async (ev) => {
+                // send request here
+            });
         }
       }
       document.addEventListener('DOMContentLoaded', initialize_popovers);
