@@ -127,7 +127,16 @@
       function initialize_popovers() {
         const popups = document.getElementByClassName('user_popup');
         for (let i = 0; i < popups.length; i++) {
-            // create popover here
+            const popover = new bootstrap.Popover(popups[i], {
+                content: 'Loading...',
+                trigger: 'hover focus',
+                placement: 'right',
+                html: true,
+                sanitize: false,
+                delay: {show: 500, hide: 0},
+                container: popups[i],
+                customClass: 'd-inline',
+            });
         }
       }
       document.addEventListener('DOMContentLoaded', initialize_popovers);
