@@ -66,35 +66,24 @@ followers = sa.Table(
 
 class User(UserMixin, db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
-
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True,
                                                 unique=True)
-    
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True,
                                              unique=True)
-    
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
-    
     posts: so.WriteOnlyMapped['Post'] = so.relationship(
-        back_populates='author'
-    )
-    
+        back_populates='author')
     following: so.WriteOnlyMapped['User'] = so.relationship(
         secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
         secondaryjoin=(followers.c.followed_id == id),
-        back_populates='followers'
-    )
-    
+        back_populates='followers')
     followers: so.WriteOnlyMapped['User'] = so.relationship(
         secondary=followers,
         primaryjoin=(followers.c.followed_id == id),
         secondaryjoin=(followers.c.follower_id == id),
-        back_populates='following'
-    )
-    
+        back_populates='following')
     about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
-    
     last_seen: so.Mapped[Optional[datetime]] = so.mapped_column(
         default=lambda: datetime.now(timezone.utc))
     
@@ -173,20 +162,13 @@ def load_user(id):
 
 class Post(SearchableMixin, db.Model):
     __searcheable__ = ['body']
-    
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    
     body: so.Mapped[str] = so.mapped_column(sa.String(140))
-    
     timestamp: so.Mapped[datetime] = so.mapped_column(
-        index=True, default=lambda: datetime.now(timezone.utc)
-    )
-    
+        index=True, default=lambda: datetime.now(timezone.utc))
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),
                                                index=True)
-    
     author: so.Mapped[User] = so.relationship(back_populates='posts')
-    
     language: so.Mapped[Optional[str]] = so.mapped_column(sa.String(5))
     
     def __repr__(self):
