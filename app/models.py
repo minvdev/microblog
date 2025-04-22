@@ -73,6 +73,10 @@ class User(UserMixin, db.Model):
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
     posts: so.WriteOnlyMapped['Post'] = so.relationship(
         back_populates='author')
+    messages_sent: so.WriteOnlyMapped['Message'] = so.relationship(
+        foreign_keys='Message.sender_id', back_populates='author')
+    messages_receives: so.WriteOnlyMapped['Message'] = so.relationship(
+        foreign_keys='Message.recipient_id', back_populates='recipient')
     following: so.WriteOnlyMapped['User'] = so.relationship(
         secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
@@ -86,6 +90,7 @@ class User(UserMixin, db.Model):
     about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
     last_seen: so.Mapped[Optional[datetime]] = so.mapped_column(
         default=lambda: datetime.now(timezone.utc))
+    last_message_read_time: so.Mapped[Optional[datetime]]
     
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -146,6 +151,12 @@ class User(UserMixin, db.Model):
             {'reset_password': self.id, 'exp': time() + expires_in},
             current_app.config['SECRET_KEY'],
             algorithm='HS256')
+    
+    def unread_message_count(self):
+        last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
+        query = sa.select(Message).where(Message.recipient == self,
+                                         Message.timestamp > last_read_time)
+        return db.session.scalar(sa.select(sa.func.count()).select_from(query.subquery()))
     
     @staticmethod
     def verify_reset_password_token(token):
