@@ -125,7 +125,7 @@
       }
 
       function initialize_popovers() {
-        const popups = document.getElementByClassName('user_popup');
+        const popups = document.getElementsByClassName('user_popup');
         for (let i = 0; i < popups.length; i++) {
           const popover = new bootstrap.Popover(popups[i], {
             content: 'Loading...',
@@ -139,7 +139,7 @@
           });
           popups[i].addEventListener('show.bs.popover', async (ev) => {
             if (ev.target.popupLoaded) {
-                return;
+              return;
             }
             const response = await fetch('/user/' + ev.target.innerText.trim() + '/popup');
             const data = await response.text();
