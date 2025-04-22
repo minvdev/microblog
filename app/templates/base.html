@@ -138,7 +138,9 @@
                 customClass: 'd-inline',
             });
             popups[i].addEventListener('show.bs.popover', async (ev) => {
-                // send request here
+                const response = await fetch('/user/' + ev.target.innerText.trim() + '/popup');
+                const data = await response.text();
+                // update popover here
             });
         }
       }
