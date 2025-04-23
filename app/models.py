@@ -164,7 +164,7 @@ class User(UserMixin, db.Model):
     def add_notification(self, name, data):
         db.session.execute(self.notifications.delete().where(
             Notification.name == name)) # Delete a notification if a older one with the same name exists
-        n = Notification(name=name, payload_json=json.dump(data), user=self)
+        n = Notification(name=name, payload_json=json.dumps(data), user=self)
         db.session.add(n)
         return n
     
