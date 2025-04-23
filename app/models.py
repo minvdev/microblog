@@ -75,7 +75,7 @@ class User(UserMixin, db.Model):
         back_populates='author')
     messages_sent: so.WriteOnlyMapped['Message'] = so.relationship(
         foreign_keys='Message.sender_id', back_populates='author')
-    messages_receives: so.WriteOnlyMapped['Message'] = so.relationship(
+    messages_received: so.WriteOnlyMapped['Message'] = so.relationship(
         foreign_keys='Message.recipient_id', back_populates='recipient')
     following: so.WriteOnlyMapped['User'] = so.relationship(
         secondary=followers,
