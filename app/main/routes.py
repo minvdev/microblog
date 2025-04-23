@@ -173,6 +173,23 @@ def send_message(recipient):
                            form=form, recipient=recipient)
     
 
+@bp.route('/messages')
+@login_required
+def messages():
+    current_user.last_message_read_time = datetime.now(timezone.utc)
+    db.session.commit()
+    page = request.args.get('page', 1, int)
+    query = current_user.messages_received.select().order_by(
+        Message.timestamp.desc())
+    messages = db.paginate(query, page=page,
+                           per_page=current_app.config['POST_PER_PAGE'],
+                           error_out=False)
+    next_url = url_for('main.messages', page=messages.next_num) \
+        if messages.has_next else None
+    prev_url = url_for('main.messages', page=messages.prev_num) \
+        if messages.has_prev else None
+    return render_template('messages.html', messages=messages.items,
+                           next_url=next_url, prev_url=prev_url)
 @bp.route('/translate', methods=['POST'])
 @login_required
 def translate_text():
