@@ -179,6 +179,8 @@ def send_message(recipient):
 @login_required
 def messages():
     current_user.last_message_read_time = datetime.now(timezone.utc)
+    current_user.add_notifications(name='unread_message_count',
+                                   data=0)
     db.session.commit()
     page = request.args.get('page', 1, int)
     query = current_user.messages_received.select().order_by(
