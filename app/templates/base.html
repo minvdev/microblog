@@ -79,14 +79,15 @@
                 aria-current="page"
                 href="{{ url_for('main.messages') }}"
               >
-                {{ _('Messages') }}
-                {% set unread_message_count = current_user.unread_message_count() %}
-                {% if unread_message_count != 0 %}
-                <span 
-                id="message_count"
-                class="badge text-bg-danger"
-                style="visibility: {% if unread_message_count %}visible{% else %}hidden{% endif %};">
-                    {{ unread_message_count }}
+                {{ _('Messages') }} {% set unread_message_count =
+                current_user.unread_message_count() %} {% if
+                unread_message_count != 0 %}
+                <span
+                  id="message_count"
+                  class="badge text-bg-danger"
+                  style="visibility: {% if unread_message_count %}visible{% else %}hidden{% endif %};"
+                >
+                  {{ unread_message_count }}
                 </span>
                 {% endif %}
               </a>
@@ -171,6 +172,11 @@
         }
       }
       document.addEventListener('DOMContentLoaded', initialize_popovers);
+      function set_message_count(n) {
+        const count = document.getElementById('message_count');
+        count.innerText = n;
+        count.style.visibility = n ? 'visible' : 'hidden';
+      }
     </script>
   </body>
 </html>
