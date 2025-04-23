@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
       <div class="container">
         <a class="navbar-brand" href="{{ url_for('main.index') }}">Microblog</a>
         <button
@@ -80,8 +80,7 @@
                 href="{{ url_for('main.messages') }}"
               >
                 {{ _('Messages') }} {% set unread_message_count =
-                current_user.unread_message_count() %} {% if
-                unread_message_count != 0 %}
+                current_user.unread_message_count() %}
                 <span
                   id="message_count"
                   class="badge text-bg-danger"
@@ -89,7 +88,6 @@
                 >
                   {{ unread_message_count }}
                 </span>
-                {% endif %}
               </a>
             </li>
             <li class="nav-item">
@@ -172,11 +170,28 @@
         }
       }
       document.addEventListener('DOMContentLoaded', initialize_popovers);
+
       function set_message_count(n) {
         const count = document.getElementById('message_count');
         count.innerText = n;
         count.style.visibility = n ? 'visible' : 'hidden';
       }
+
+      {% if current_user.is_authenticated %}
+      function initialize_notifications() {
+        let since = 0;
+        setInterval(async function() {
+          const response = await fetch('{{ url_for('main.notifications') }}?since=' + since);
+          const notifications = await response.json();
+          for (let i = 0; i < notifications.length; i++) {
+            if (notifications[i].name == 'unread_message_count')
+              set_message_count(notifications[i].data);
+            since = notifications[i].timestamp;
+          }
+        }, 10000);
+      }
+      document.addEventListener('DOMContentLoaded', initialize_notifications);
+      {% endif %}
     </script>
   </body>
 </html>
