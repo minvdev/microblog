@@ -198,7 +198,7 @@ class Message(db.Model):
         foreign_keys='Message.sender_id',
         back_populates='messages_sent')
     recipient: so.Mapped[User] = so.relationship(
-        foreign_keys='Messages.recipient_id',
+        foreign_keys='Message.recipient_id',
         back_populates='messages_received')
     
     def __repr__(self):
