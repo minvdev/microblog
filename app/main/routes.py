@@ -182,7 +182,7 @@ def messages():
     query = current_user.messages_received.select().order_by(
         Message.timestamp.desc())
     messages = db.paginate(query, page=page,
-                           per_page=current_app.config['POST_PER_PAGE'],
+                           per_page=current_app.config['POSTS_PER_PAGE'],
                            error_out=False)
     next_url = url_for('main.messages', page=messages.next_num) \
         if messages.has_next else None
