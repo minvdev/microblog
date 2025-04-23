@@ -161,6 +161,13 @@ class User(UserMixin, db.Model):
                                          Message.timestamp > last_read_time)
         return db.session.scalar(sa.select(sa.func.count()).select_from(query.subquery()))
     
+    def add_notification(self, name, data):
+        db.session.execute(self.notifications.delete().where(
+            Notification.name == name)) # Delete a notification if a older one with the same name exists
+        n = Notification(name=name, payload_json=json.dump(data), user=self)
+        db.session.add(n)
+        return n
+    
     @staticmethod
     def verify_reset_password_token(token):
         try:
