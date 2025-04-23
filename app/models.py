@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 from hashlib import md5
 from time import time
+import json
 from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as so
@@ -91,6 +92,8 @@ class User(UserMixin, db.Model):
     last_seen: so.Mapped[Optional[datetime]] = so.mapped_column(
         default=lambda: datetime.now(timezone.utc))
     last_message_read_time: so.Mapped[Optional[datetime]]
+    notifications: so.WriteOnlyMapped['Notification'] = so.relationship(
+        back_populates='user')
     
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -203,3 +206,14 @@ class Message(db.Model):
     
     def __repr__(self):
         return '<Message {}>'.format(self.body)
+
+class Notification(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    name: so.Mapped[str] = so.mapped_column(sa.String(128), index=True)
+    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)
+    timestamp: so.Mapped[float] = so.mapped_column(index=True, default=time)
+    payload_json: so.Mapped[str] = so.mapped_column(sa.Text)
+    user: so.Mapped[User] = so.relationship(back_populates='notifications')
+    
+    def get_data(self):
+        return json.loads(str(self.payload_json))
