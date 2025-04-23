@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-04-22 13:00+0200\n"
+"POT-Creation-Date: 2025-04-23 10:44+0200\n"
 "PO-Revision-Date: 2025-03-27 16:20+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -72,7 +72,7 @@ msgid "Please use a different email adress."
 msgstr "Por favor usa una dirección de correo electrónico diferente"
 
 #: app/auth/forms.py:37 app/main/forms.py:13 app/main/forms.py:27
-#: app/main/forms.py:32
+#: app/main/forms.py:32 app/main/forms.py:47
 msgid "Submit"
 msgstr "Enviar"
 
@@ -113,6 +113,10 @@ msgstr "Cuenta algo"
 #: app/main/forms.py:35 app/main/routes.py:77
 msgid "Search"
 msgstr "Buscar"
+
+#: app/main/forms.py:45
+msgid "Message"
+msgstr "Mensaje"
 
 #: app/main/routes.py:36
 msgid "Your post is now live!"
@@ -157,6 +161,15 @@ msgstr "No puedes dejar de seguirte a ti mismo!"
 msgid "You are not following %(username)s."
 msgstr "Has dejado de seguir a %(username)s."
 
+#: app/main/routes.py:170
+#, fuzzy
+msgid "Your message has been sent."
+msgstr "Tu mensaje ha sido enviado."
+
+#: app/main/routes.py:172
+msgid "Send Message"
+msgstr "Enviar un Mensaje"
+
 #: app/templates/_post.html:16
 #, python-format
 msgid "%(username)s said %(when)s"
@@ -174,11 +187,15 @@ msgstr "Bienvenido a Microblog!"
 msgid "Login"
 msgstr "Inicia sesión"
 
-#: app/templates/base.html:81
+#: app/templates/base.html:81 app/templates/messages.html:4
+msgid "Messages"
+msgstr "Mensajes"
+
+#: app/templates/base.html:89
 msgid "Profile"
 msgstr "Perfil"
 
-#: app/templates/base.html:89
+#: app/templates/base.html:97
 msgid "Logout"
 msgstr "Cerrar sesión"
 
@@ -188,18 +205,33 @@ msgid "Hi, %(username)s!"
 msgstr "Hola, %(username)s!"
 
 #: app/templates/index.html:16 app/templates/search.html:8
-#: app/templates/user.html:45
+#: app/templates/user.html:52
 msgid "Newer posts"
 msgstr "Publicaciones más nuevas"
 
 #: app/templates/index.html:21 app/templates/search.html:13
-#: app/templates/user.html:50
+#: app/templates/user.html:57
 msgid "Older posts"
 msgstr "Publicaciones más antiguas"
+
+#: app/templates/messages.html:12
+#, fuzzy
+msgid "Newer messages"
+msgstr "Nuevos mensajes"
+
+#: app/templates/messages.html:17
+#, fuzzy
+msgid "Older messages"
+msgstr "Mensajes antiguos"
 
 #: app/templates/search.html:2
 msgid "Search Results"
 msgstr "Resultados de la búsqueda"
+
+#: app/templates/send_message.html:4
+#, python-format
+msgid "Send Message to %(recipient)s"
+msgstr "Enviar un Mensaje a %(recipient)s"
 
 #: app/templates/user.html:14
 #, python-format
@@ -232,15 +264,19 @@ msgstr "Seguir"
 msgid "Unfollow"
 msgstr "Dejar de seguir"
 
+#: app/templates/user.html:38
+msgid "Send private message"
+msgstr "Enviar un mensaje privado"
+
 #: app/templates/user_popup.html:9
 #, fuzzy, python-format
 msgid "%(count)d followers"
-msgstr "%(count)s seguidores"
+msgstr "%(count)d seguidores"
 
 #: app/templates/user_popup.html:9
 #, fuzzy, python-format
 msgid "%(count)d following"
-msgstr "%(count)s siguiendo"
+msgstr "%(count)d siguiendo"
 
 #: app/templates/auth/login.html:5
 msgid "Sign In"
