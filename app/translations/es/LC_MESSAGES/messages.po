@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-04-23 10:44+0200\n"
+"POT-Creation-Date: 2025-04-23 11:26+0200\n"
 "PO-Revision-Date: 2025-03-27 16:20+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -162,9 +162,8 @@ msgid "You are not following %(username)s."
 msgstr "Has dejado de seguir a %(username)s."
 
 #: app/main/routes.py:170
-#, fuzzy
 msgid "Your message has been sent."
-msgstr "Tu mensaje ha sido enviado."
+msgstr "Su mensaje ha sido enviado."
 
 #: app/main/routes.py:172
 msgid "Send Message"
@@ -215,14 +214,12 @@ msgid "Older posts"
 msgstr "Publicaciones más antiguas"
 
 #: app/templates/messages.html:12
-#, fuzzy
 msgid "Newer messages"
-msgstr "Nuevos mensajes"
+msgstr "Mensajes más nuevos"
 
 #: app/templates/messages.html:17
-#, fuzzy
 msgid "Older messages"
-msgstr "Mensajes antiguos"
+msgstr "Mensajes más antiguos"
 
 #: app/templates/search.html:2
 msgid "Search Results"
