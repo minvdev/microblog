@@ -23,3 +23,5 @@ class Config:
     TRANSLATOR_KEY = os.environ.get('CLOUD_TRANSLATION_API_KEY')
     # Full text search
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+    # Redis
+    REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'
