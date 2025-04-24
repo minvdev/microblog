@@ -5,6 +5,9 @@ from app.models import Task, User, Post
 import sys
 import time
 import sqlalchemy as sa
+import json
+from flask import render_template
+from app.email import send_email
 
 app = create_app()
 app.app_context().push()
@@ -35,7 +38,14 @@ def export_posts(user_id):
             time.sleep(5)
             i += 1
             _set_task_progress(100 * i // total_posts)
-        # send email with data to user
+
+        send_email(
+            '[Microblog] Your blog posts',
+            sender=app.config['MAIL_DEFAULT_SENDER'], recipients=[user.email],
+            text_body=render_template('email/export_posts.txt', user=user),
+            html_body=render_template('email/export_posts.html', user=user),
+            attachments=[('posts.json', 'application/json', json.dumps({'posts': data}, indent=4))],
+            sync=True)
     except Exception:
         _set_task_progress(100)
         app.logger.error('Unhandled exception', exc_info=sys.exc_info())
