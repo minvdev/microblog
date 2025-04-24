@@ -7,7 +7,6 @@ app = create_app()
 app.app_context().push()
 
 def _set_task_progress(progress):
-    
     job = get_current_job()
     if job:
         job.meta['progress'] = progress
