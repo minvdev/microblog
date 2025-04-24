@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-04-23 11:26+0200\n"
+"POT-Creation-Date: 2025-04-24 21:00+0200\n"
 "PO-Revision-Date: 2025-03-27 16:20+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app/__init__.py:21
+#: app/__init__.py:23
 msgid "Please log in to access this page."
 msgstr "Porfavor inicia sesión para acceder a esta página."
 
@@ -161,13 +161,21 @@ msgstr "No puedes dejar de seguirte a ti mismo!"
 msgid "You are not following %(username)s."
 msgstr "Has dejado de seguir a %(username)s."
 
-#: app/main/routes.py:170
+#: app/main/routes.py:172
 msgid "Your message has been sent."
 msgstr "Su mensaje ha sido enviado."
 
-#: app/main/routes.py:172
+#: app/main/routes.py:174
 msgid "Send Message"
 msgstr "Enviar un Mensaje"
+
+#: app/main/routes.py:223
+msgid "An export task is currently in progress"
+msgstr "Ya hay una exportación en curso"
+
+#: app/main/routes.py:225
+msgid "Exporting posts..."
+msgstr "Exportando publicaciones..."
 
 #: app/templates/_post.html:16
 #, python-format
@@ -186,15 +194,15 @@ msgstr "Bienvenido a Microblog!"
 msgid "Login"
 msgstr "Inicia sesión"
 
-#: app/templates/base.html:81 app/templates/messages.html:4
+#: app/templates/base.html:82 app/templates/messages.html:4
 msgid "Messages"
 msgstr "Mensajes"
 
-#: app/templates/base.html:89
+#: app/templates/base.html:98
 msgid "Profile"
 msgstr "Perfil"
 
-#: app/templates/base.html:97
+#: app/templates/base.html:106
 msgid "Logout"
 msgstr "Cerrar sesión"
 
@@ -204,12 +212,12 @@ msgid "Hi, %(username)s!"
 msgstr "Hola, %(username)s!"
 
 #: app/templates/index.html:16 app/templates/search.html:8
-#: app/templates/user.html:52
+#: app/templates/user.html:55
 msgid "Newer posts"
 msgstr "Publicaciones más nuevas"
 
 #: app/templates/index.html:21 app/templates/search.html:13
-#: app/templates/user.html:57
+#: app/templates/user.html:60
 msgid "Older posts"
 msgstr "Publicaciones más antiguas"
 
@@ -253,15 +261,19 @@ msgstr "%(count)s siguiendo"
 msgid "Edit your profile"
 msgstr "Edita tu perfil"
 
-#: app/templates/user.html:24 app/templates/user_popup.html:15
+#: app/templates/user.html:21
+msgid "Export your posts"
+msgstr "Exporta tus publicaciones"
+
+#: app/templates/user.html:27 app/templates/user_popup.html:15
 msgid "Follow"
 msgstr "Seguir"
 
-#: app/templates/user.html:31 app/templates/user_popup.html:22
+#: app/templates/user.html:34 app/templates/user_popup.html:22
 msgid "Unfollow"
 msgstr "Dejar de seguir"
 
-#: app/templates/user.html:38
+#: app/templates/user.html:41
 msgid "Send private message"
 msgstr "Enviar un mensaje privado"
 
