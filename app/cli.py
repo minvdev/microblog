@@ -1,6 +1,8 @@
 import os
-from flask import Blueprint
 import click
+from flask import Blueprint
+from app import models
+from app.models import SearchableMixin
 
 bp = Blueprint('cli', __name__, cli_group=None)
 
@@ -34,3 +36,26 @@ def compile():
     """Compile all languages."""
     if os.system('pybabel compile -d app/translations'):
         raise RuntimeError('compile command failed')
+
+
+@bp.cli.group()
+def searching():
+    """Search functionality mantenance commands."""
+    pass
+
+@searching.command()
+@click.argument('model')
+def reindex(model):
+    """Refresh an index with all the data from the relational side to the elastic side."""
+    click.echo(f'Debug (1): str[{model}].')
+    ModelClass = getattr(models, model)
+    click.echo(f'Debug (2): str[{model}] cls[{ModelClass}].')
+    
+    if ModelClass is None:
+        raise RuntimeError(f'reindex command failed, Model str[{model}] cls[{ModelClass}] does not exist.')
+        
+    if not issubclass(ModelClass, SearchableMixin):
+        raise RuntimeError(f'reindex command failed, Model str[{model}] cls[{ModelClass}] is not a searcheable (does not inherit from SearcheableMixin Class)')
+    
+    ModelClass.reindex()
+    click.echo(f'Reindexed {ModelClass}.')
