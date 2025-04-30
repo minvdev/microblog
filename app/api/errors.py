@@ -5,3 +5,6 @@ def error_response(status_code, message=None):
     if message:
         payload['message'] = message
     return payload, status_code
+
+def bad_request(message):
+    return error_response(400, message)
