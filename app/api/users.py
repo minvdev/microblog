@@ -5,34 +5,40 @@ import sqlalchemy as sa
 from flask import request
 
 @bp.route('/users/<int:id>', methods=['GET'])
-# Return a user
 def get_user(id):
+    """Return a user"""
     return db.get_or_404(User, id).to_dict()
 
 @bp.route('/users', methods=['GET'])
-# Return the collection of all users
 def get_users():
+    """Return the collection of all users"""
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)
     return User.to_collection_dict(sa.select(User), page, per_page,
                                    'api.get_users')
 
 @bp.route('/users/<int:id>/followers', methods=['GET'])
-# Return the followers of this user
 def get_followers(id):
-    pass
+    """Return the followers of this user"""
+    user = db.get_or_404(User, id)
+    page = request.args.get('page', 1, type=int)
+    per_page = min(request.args.get('per_page', 10, type=int), 100)
+    return User.to_collection_dict(user.followers.selct(), page, per_page,
+                                   'api.get_users')
 
 @bp.route('/users/<int:id>/following', methods=['GET'])
-# Return the users this user is following
 def get_following(id):
-    pass
+    """Return the users this user is following"""
+    user = db.get_or_404(User, id)
+    page = request.args.get('page', 1, type=int)
+    per_page = min(request.args.get('per_page', 10, type=int), 100)
+    return User.to_collection_dict(user.following.selct(), page, per_page,
+                                   'api.get_users')
 
 @bp.route('/users', methods=['POST'])
-# Register a new user account
 def create_user():
-    pass
+    """Register a new user account"""
 
 @bp.route('/users/<int:id>', methods=['PUT'])
-# Modify a user
 def update_user(id):
-    pass
+    """Modify a user"""
