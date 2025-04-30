@@ -1,16 +1,19 @@
 from app.api import bp
 from app import db
 from app.models import User
-from flask import request, url_for
+from flask import request, url_for, abort
 from app.api.errors import bad_request
+from app.api.auth import token_auth
 import sqlalchemy as sa
 
 @bp.route('/users/<int:id>', methods=['GET'])
+@token_auth.login_required
 def get_user(id):
     """Return a user"""
     return db.get_or_404(User, id).to_dict()
 
 @bp.route('/users', methods=['GET'])
+@token_auth.login_required
 def get_users():
     """Return the collection of all users"""
     page = request.args.get('page', 1, type=int)
@@ -19,6 +22,7 @@ def get_users():
                                    'api.get_users')
 
 @bp.route('/users/<int:id>/followers', methods=['GET'])
+@token_auth.login_required
 def get_followers(id):
     """Return the followers of this user"""
     user = db.get_or_404(User, id)
@@ -28,6 +32,7 @@ def get_followers(id):
                                    'api.get_followers', id=id)
 
 @bp.route('/users/<int:id>/following', methods=['GET'])
+@token_auth.login_required
 def get_following(id):
     """Return the users this user is following"""
     user = db.get_or_404(User, id)
@@ -56,8 +61,11 @@ def create_user():
                                                      id=user.id)}
 
 @bp.route('/users/<int:id>', methods=['PUT'])
+@token_auth.login_required
 def update_user(id):
     """Modify a user"""
+    if token_auth.current_user().id != id:
+        abort(403)
     user = db.get_or_404(User, id)
     data = request.get_json()
     if 'username' in data and data['username'] != user.username and \
