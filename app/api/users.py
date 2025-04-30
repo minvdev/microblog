@@ -23,7 +23,7 @@ def get_followers(id):
     user = db.get_or_404(User, id)
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)
-    return User.to_collection_dict(user.followers.selct(), page, per_page,
+    return User.to_collection_dict(user.followers.select(), page, per_page,
                                    'api.get_users')
 
 @bp.route('/users/<int:id>/following', methods=['GET'])
@@ -32,7 +32,7 @@ def get_following(id):
     user = db.get_or_404(User, id)
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)
-    return User.to_collection_dict(user.following.selct(), page, per_page,
+    return User.to_collection_dict(user.following.select(), page, per_page,
                                    'api.get_users')
 
 @bp.route('/users', methods=['POST'])
