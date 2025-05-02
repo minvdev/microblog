@@ -47,9 +47,7 @@ def searching():
 @click.argument('model')
 def reindex(model):
     """Refresh an index with all the data from the relational side to the elastic side."""
-    click.echo(f'Debug (1): str[{model}].')
     ModelClass = getattr(models, model)
-    click.echo(f'Debug (2): str[{model}] cls[{ModelClass}].')
     
     if ModelClass is None:
         raise RuntimeError(f'reindex command failed, Model str[{model}] cls[{ModelClass}] does not exist.')
