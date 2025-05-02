@@ -8,3 +8,4 @@ messages.pot
 *.json
 .vagrant
 docker_commands.txt
+docker-compose.yml
