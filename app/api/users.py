@@ -1,6 +1,6 @@
 from app.api import bp
 from app import db
-from app.models import User
+from app.models import User, Post
 from flask import request, url_for, abort
 from app.api.errors import bad_request
 from app.api.auth import token_auth
@@ -40,6 +40,11 @@ def get_following(id):
     per_page = min(request.args.get('per_page', 10, type=int), 100)
     return User.to_collection_dict(user.following.select(), page, per_page,
                                    'api.get_following', id=id)
+
+@bp.route('/users/<int:id>/posts', methods=['GET'])
+@token_auth.login_required
+def new_post(id):
+    """Return all the posts of the user""" 
 
 @bp.route('/users', methods=['POST'])
 def create_user():
