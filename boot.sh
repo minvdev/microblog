@@ -7,4 +7,8 @@ while true; do
     echo Upgrade command failed, retrying in 5 secs...
     sleep 5
 done
+
+echo Running initial search index
+flask searching reindex "Post"
+
 exec gunicorn -b :5000 --access-logfile - --error-logfile - microblog:app
