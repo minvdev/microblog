@@ -19,21 +19,23 @@ def get_posts():
     """Return all posts from the db"""
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)
-    return Post.to_collection_dict(sa.select(Post), page, per_page,
+    return Post.to_collection_dict(sa.select(Post).order_by(Post.timestamp.desc()), page, per_page,
                                    'api.get_posts')
 
 @bp.route('/posts', methods=['POST'])
 @token_auth.login_required
 def create_post():
     """Share a new post"""
+    print(request.content_type, request.data)
     data = request.get_json()
+    
     if 'body' not in data:
         return bad_request('Must include body field')
     
     if len(data['body']) > 140:
         return bad_request('Body cannot exceed 140 characters')
     
-    data['user_id'] = token_auth.current_user.id if token_auth.current_user.id \
+    data['user_id'] = token_auth.current_user().id if token_auth.current_user().id \
         else bad_request('The user id could not be found')
     
     try:
