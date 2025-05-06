@@ -43,7 +43,7 @@ def get_following(id):
 
 @bp.route('/users/<int:id>/posts', methods=['GET'])
 @token_auth.login_required
-def get_posts(id):
+def get_user_posts(id):
     """Return all the posts of the user"""
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)

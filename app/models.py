@@ -313,8 +313,8 @@ class Post(PaginatedAPIMixin, SearchableMixin, db.Model):
             },
             '_links': {
                 'this_post': url_for('api.get_post', id=self.id),
-                'self_posts': url_for('api.get_posts', id=self.author.id),
-                'self_user': url_for('api.get_user', id=self.author.id),
+                'self_posts': url_for('api.get_user_posts', id=self.author.id),
+                'self_user': url_for('api.get_user', id=self.author.id)
             }
         }
         return data
