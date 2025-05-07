@@ -48,7 +48,7 @@ def get_user_posts(id):
     user = db.get_or_404(User, id)
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)
-    return User.to_collection_dict(user.posts.select(), page, per_page,
+    return User.to_collection_dict(user.posts.select().order_by(Post.timestamp.desc()), page, per_page,
                                    'api.get_user_posts', id=id)
 
 @bp.route('/users', methods=['POST'])
