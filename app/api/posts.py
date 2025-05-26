@@ -35,6 +35,9 @@ def create_post():
     if len(data['body']) > 140:
         return bad_request('Body cannot exceed 140 characters')
     
+    if len(data['body']) <= 0:
+        return bad_request('Body cannot be void')
+    
     data['user_id'] = token_auth.current_user().id if token_auth.current_user().id \
         else bad_request('The user id could not be found')
     
